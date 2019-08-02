@@ -1,0 +1,53 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css";
+@import "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css";
+
+body 
+{
+    background-color: #CFCFCF;
+}
+.wrap 
+{
+    background-color: #FFFF;
+    max-width: 18em;
+    margin: auto;
+    margin-top: 10em;
+    border-radius: 1em;
+}
+.music_div
+{
+    background-color: black;
+    border-bottom-right-radius: 3em;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+}
+.music_img
+{
+    width: 16em;
+    height: 11em;
+    /* background-image: url(../music.png); */
+}
+.list-group 
+{
+    padding-bottom: 1em;
+}
+.list-group-item
+{
+    border: none;
+    border-bottom: 2px solid rgba(0,0,0,.125);
+}
+/* .list-group-item.active 
+{
+    
+     background-color:rgba(255, 255, 255,1);
+     border-bottom: 2px solid rgba(0,0,0,.125) !important;
+    border: none;
+    color: #495057;
+}
+.list-group-item.active  .text-muted 
+{
+    color: #6c757d!important;
+} */
+.text-muted
+{
+    color: #CFCFCF;
+}
