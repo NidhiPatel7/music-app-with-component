@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
+import NewMusicForm from './NewMusicForm.js';
+import Music from './Music.js';
 // import logo from './logo.svg';
-import music from './music.png';
+import img from './music.png';
 import './App.css';
 
 class App extends Component 
@@ -8,24 +10,51 @@ class App extends Component
   constructor(props)
   {
     super(props);
-    // this.state = musics [
-    //   {
-    //     id:1,
-    //     song:'This is my kingdom',
-    //     Artist:'Imagine Dragons',
-    //   },
-    //   {
-    //     id:2,
-    //     song:'Song2',
-    //     Artist:'abc',
-    //   },
-    //   {
-    //     id:3,
-    //     song:'Beliver',
-    //     Artist:'Imagine Dragons',
-    //   }
-    // ];
+    this.state =
+    {
+      musics: [
+        {
+          id:1,
+          song:'This is my kingdom',
+          Artist:'Imagine Dragons',
+        },
+        {
+          id:2,
+          song:'Song2',
+          Artist:'abc',
+        },
+        {
+          id:3,
+          song:'Beliver',
+          Artist:'Imagine Dragons',
+        }
+      ]
+    }
   }
+  addMusic = (data) => 
+  {
+      var newMusics = {
+        id:Date.now(),
+        ...data,
+      }
+      var newList = [newMusics,...this.state.musics];
+      this.setState({musics:newList});
+  }
+  removeMusic = (id) =>
+  {
+      var musics = this.state.musics;
+     var filtered = musics.filter((music) =>
+     {
+        return music.id !== id;
+     })
+     this.setState({musics:filtered});
+     //console.log(filtered);
+  }
+  editMusic = (id,data) => 
+  {
+
+  }
+
 
   render() 
   {
@@ -34,7 +63,7 @@ class App extends Component
       <div className="container">
           <div className="row">
               <div className="col-md-12 music_div">
-                  <img className="music_img" src={music} alt="music" />
+                  <img className="music_img" src={img} alt="music" />
               </div>
           </div>
           <div className="row">
@@ -43,15 +72,20 @@ class App extends Component
               </div>
           </div>
           <div className="list-group">
-                  <a href="#" className="list-group-item list-group-item-action flex-column align-items-start ">
-                    <div className="d-flex w-100 justify-content-between">
-                      <h5 className="mb-1">This is my kingdom</h5>
-                      
-                      <small><i className="fas fa-trash-alt"></i></small>
-                    </div>
-                    
-                    <small className="text-muted">Imagine Dragons</small>
-                  </a>
+            {
+              this.state.musics.map((music) =>{
+                var musicProps = {
+                  ...music,
+                  key:music.id,
+                  removeMusic:this.removeMusic,
+                };
+
+                return(
+                  <Music {...musicProps}/>
+                );
+              })
+            }
+                  
                   {/* <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
                     <div className="d-flex w-100 justify-content-between">
                       <h5 className="mb-1">Song2</h5>
@@ -69,17 +103,8 @@ class App extends Component
                     <small className="text-muted">Imagine Dragons</small>
                   </a> */}
                 </div>
-                <form className="form-inline">
-                  <div className="form-group mx-sm-3 mb-2">
-                      <label htmlFor="inputPassword2" className="sr-only">Song</label>
-                      <input type="password" className="form-control" id="inputPassword2" placeholder="Song"/>
-                  </div>
-                  <div className="form-group mx-sm-3 mb-2">
-                    <label htmlFor="inputPassword2" className="sr-only">Artist</label>
-                    <input type="password" className="form-control" id="inputPassword2" placeholder="Artist"/>
-                  </div>
-                  <button type="submit" className="btn btn-primary mb-2">Add</button>
-                </form>
+               {/* add form */}
+               <NewMusicForm addMusic={this.addMusic}/>
       </div>
   </div>
     );
