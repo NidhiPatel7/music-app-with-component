@@ -52,7 +52,20 @@ class App extends Component
   }
   editMusic = (id,data) => 
   {
-
+    var musics = this.state.musics;
+    var index = musics.findIndex(function(music)
+    {
+      return music.id === id;
+    })
+    //console.log(index);
+    // musics[index] which is old data old song name or artist name
+    //data which is song or artist name which we updated new one
+    var updatedMusic = {...musics[index],...data};//we updated old to new and add data in 
+    // console.log(updatedMusic);
+    musics[index] = updatedMusic;
+    //transfer updatedMusic value on particular potion in musics list
+    this.setState({musics:musics});
+    //console.log( musics[index]);
   }
 
 
@@ -77,7 +90,8 @@ class App extends Component
                 var musicProps = {
                   ...music,
                   key:music.id,
-                  removeMusic:this.removeMusic,
+                  removeMusic:this.removeMusic,//here removeMusic(is fun name which we call in music.js):this.removeMusic(fun name which we create in app.js file)
+                  editMusic:this.editMusic,
                 };
 
                 return(
